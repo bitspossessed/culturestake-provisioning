@@ -16,12 +16,12 @@ rm -rf build
 git fetch --all
 git reset --hard origin/master
 
+# Link to .env file
+ln -f -s ../../.env .env
+
 # Install dependencies
 echo "Installing npm dependencies .."
 npm install &> /dev/null
 
-# Compile contracts
-./node_modules/.bin/truffle compile
-
 # Migrate contracts
-./node_modules/.bin/truffle migrate
+npm run migrate

@@ -21,7 +21,7 @@ echo "Installing npm dependencies .."
 npm install &> /dev/null
 
 # Link to .env file
-ln -s ../../.env .env
+ln -f -s ../../.env .env
 
 # Prepare subgraph
 npm run codegen

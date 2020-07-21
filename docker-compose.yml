@@ -3,27 +3,29 @@ version: '3'
 volumes:
   certs:
   conf:
+  data:
   html:
   ipfs:
   vhost.d:
 
 services:
   db:
-    image: postgres:12.1-alpine
+    image: postgres:12.2-alpine
     container_name: culturestake-db
     env_file:
       - .env
     volumes:
       - ./db/init-dbs.sh:/docker-entrypoint-initdb.d/init-dbs.sh
+      - data:/var/lib/postgresql/data
 
   redis:
-    image: redis:5.0.7-alpine
+    image: redis:6.0.1-alpine
     container_name: culturestake-redis
     env_file:
       - .env
 
   nginx:
-    image: nginx:alpine
+    image: nginx:1.19.1-alpine
     container_name: culturestake-nginx-proxy
     depends_on:
       - db
@@ -36,7 +38,7 @@ services:
       - vhost.d:/etc/nginx/vhost.d
 
   gen:
-    image: jwilder/docker-gen
+    image: jwilder/docker-gen:0.7.0
     container_name: culturestake-nginx-gen
     depends_on:
       - nginx
@@ -50,7 +52,7 @@ services:
     command: -notify-sighup culturestake-nginx-proxy -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
 
   ipfs:
-    image: ipfs/go-ipfs
+    image: ipfs/go-ipfs:v0.4.23
     container_name: culturestake-ipfs-node
     ports:
       - "5001:5001"
@@ -58,7 +60,7 @@ services:
       - ipfs:/data/ipfs
 
   graph:
-    image: graphprotocol/graph-node:v0.17.1
+    image: graphprotocol/graph-node:v0.18.0
     container_name: culturestake-graph-node
     depends_on:
       - db

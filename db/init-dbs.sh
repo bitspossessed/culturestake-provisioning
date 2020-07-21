@@ -7,6 +7,11 @@ DATABASES=(
   $POSTGRES_DATABASE_MAIN
 )
 
+if [[ $ENV == "development" ]]
+then
+  DATABASES+=($POSTGRES_DATABASE_TEST)
+fi
+
 create_database () {
   DB_NAME=$1
 
@@ -18,7 +23,7 @@ create_database () {
 EOSQL
 }
 
-# Create all necessary databases for Circles
+# Create all necessary databases
 for db in "${DATABASES[@]}"
 do
   create_database $db
