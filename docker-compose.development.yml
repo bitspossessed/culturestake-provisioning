@@ -6,7 +6,7 @@ services:
       - "5432:5432"
 
   ganache:
-    image: trufflesuite/ganache-cli:latest
+    image: trufflesuite/ganache-cli:v6.9.1
     container_name: culturestake-ganache
     ports:
       - "8545:8545"
