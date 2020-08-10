@@ -23,3 +23,15 @@ services:
       - html:/usr/share/nginx/html
       - vhost.d:/etc/nginx/vhost.d
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  app:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+      args:
+        - GIT_COMMIT=c0dfb5b
+    container_name: culturestake-app
+    environment:
+      - VIRTUAL_HOST=${HOST_APP}
+      - LETSENCRYPT_HOST=${HOST_APP}
+      - LETSENCRYPT_EMAIL=${SSL_EMAIL}
