@@ -53,7 +53,8 @@ services:
 
   api:
     build:
-      context: ./api
+      context: .
+      dockerfile: api/Dockerfile
       args:
         - GIT_COMMIT=c0dfb5b
     container_name: culturestake-api

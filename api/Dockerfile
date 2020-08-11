@@ -18,6 +18,9 @@ RUN git clone https://github.com/lazaruslabs/culturestake.git app \
 
 WORKDIR /usr/src/app
 
+# Prepare variables
+COPY .env .
+
 RUN npm install \
       && npm run build
 
@@ -28,7 +31,8 @@ WORKDIR /usr/src/app
 
 EXPOSE 3000
 
-COPY run.sh .
+COPY api/run.sh .
+
 RUN chmod +x run.sh
 
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["/usr/src/app/run.sh"]

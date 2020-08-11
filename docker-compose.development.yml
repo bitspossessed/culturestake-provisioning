@@ -56,3 +56,5 @@ services:
     depends_on:
       - db
       - graph
+    ports:
+      - "3000:3000"
