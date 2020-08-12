@@ -51,33 +51,20 @@ services:
       - ./nginx-proxy/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
     command: -notify-sighup culturestake-nginx-proxy -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
 
-  ipfs:
-    image: ipfs/go-ipfs:v0.4.23
-    container_name: culturestake-ipfs-node
-    ports:
-      - "5001:5001"
-    volumes:
-      - ipfs:/data/ipfs
-
-  graph:
-    image: graphprotocol/graph-node:v0.18.0
-    container_name: culturestake-graph-node
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+      args:
+        - GIT_COMMIT=c0dfb5b
+    container_name: culturestake-api
     depends_on:
       - db
-      - ipfs
-    ports:
-      - "8001:8001"
-      - "8020:8020"
-      - "8030:8030"
-      - "8040:8040"
+    env_file:
+      - .env
     environment:
+      - GRAPH_NODE_ENDPOINT=${GRAPH_NODE_ENDPOINT}
+      - VIRTUAL_HOST=${HOST_API}
+      - LETSENCRYPT_HOST=${HOST_API}
       - LETSENCRYPT_EMAIL=${SSL_EMAIL}
-      - LETSENCRYPT_HOST=${HOST_GRAPH_NODE}
-      - VIRTUAL_HOST=${HOST_GRAPH_NODE}
-      - VIRTUAL_PORT=8000
-      - ethereum=${SUBGRAPH_NETWORK}:${ETHEREUM_NODE_ENDPOINT}
-      - ipfs=ipfs:5001
-      - postgres_db=${POSTGRES_DATABASE_GRAPH_NODE}
-      - postgres_host=db:5432
-      - postgres_pass=${POSTGRES_PASSWORD}
-      - postgres_user=${POSTGRES_USER}
+
