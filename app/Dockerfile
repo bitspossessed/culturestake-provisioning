@@ -4,11 +4,14 @@ ARG GIT_COMMIT
 
 WORKDIR /usr/src
 
+# Create man folders which are required by postgres
+RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{}
+
 # Install dependencies
 RUN apt-get update \
-      && apt-get install -y git python build-essential
+      && apt-get install -y git python build-essential postgresql-client
 
-# Clone app repository
+# Install and build culturestake app
 RUN git clone https://github.com/lazaruslabs/culturestake.git app \
       && cd app \
       && git checkout --quiet ${GIT_COMMIT}
@@ -18,22 +21,18 @@ WORKDIR /usr/src/app
 # Prepare variables
 COPY .env .
 
-# Install dependencies
-RUN npm install
+RUN npm install \
+      && npm run build
 
-# Generate static files
-RUN npm run client:build
-
-# Clean up
+# Remove unneeded dependencies
 RUN apt-get purge -y --auto-remove build-essential
-RUN rm -rf node_modules
-RUN rm .env
 
-# Install and run static http-server
-WORKDIR /usr/src/app/build/client
+WORKDIR /usr/src/app
 
-RUN npm install -g http-server
+EXPOSE 3000
 
-EXPOSE 8080
+COPY api/run.sh .
 
-CMD http-server --port 8080 --proxy http://app:8080? -d false --cors -c-1
+RUN chmod +x run.sh
+
+ENTRYPOINT ["/usr/src/app/run.sh"]
