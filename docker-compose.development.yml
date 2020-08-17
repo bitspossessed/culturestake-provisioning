@@ -1,12 +1,15 @@
 version: '3'
 
+volumes:
+  ipfs:
+
 services:
   db:
     ports:
       - "5432:5432"
 
   ganache:
-    image: trufflesuite/ganache-cli:v6.9.1
+    image: trufflesuite/ganache-cli:v6.10.1
     container_name: culturestake-ganache
     ports:
       - "8545:8545"
@@ -35,6 +38,7 @@ services:
       - db
       - ganache
       - ipfs
+      - nginx
     ports:
       - "8001:8001"
       - "8020:8020"
@@ -51,10 +55,3 @@ services:
       - postgres_host=db:5432
       - postgres_pass=${POSTGRES_PASSWORD}
       - postgres_user=${POSTGRES_USER}
-
-  api:
-    depends_on:
-      - db
-      - graph
-    ports:
-      - "3000:3000"

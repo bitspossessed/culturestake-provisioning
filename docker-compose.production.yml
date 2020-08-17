@@ -31,7 +31,13 @@ services:
       args:
         - GIT_COMMIT=c0dfb5b
     container_name: culturestake-app
+    depends_on:
+      - db
+    env_file:
+      - .env
     environment:
+      - GRAPH_NODE_ENDPOINT=${GRAPH_NODE_ENDPOINT}
       - VIRTUAL_HOST=${HOST_APP}
       - LETSENCRYPT_HOST=${HOST_APP}
       - LETSENCRYPT_EMAIL=${SSL_EMAIL}
+
