@@ -31,7 +31,7 @@ WORKDIR /usr/src/app
 
 EXPOSE 3000
 
-COPY api/run.sh .
+COPY app/run.sh .
 
 RUN chmod +x run.sh
 
