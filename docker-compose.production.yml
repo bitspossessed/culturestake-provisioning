@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+  uploads:
+
 services:
   nginx:
     ports:
@@ -40,3 +43,5 @@ services:
       - VIRTUAL_HOST=${HOST_APP}
       - LETSENCRYPT_HOST=${HOST_APP}
       - LETSENCRYPT_EMAIL=${SSL_EMAIL}
+    volumes:
+      - uploads:/usr/src/app/uploads
