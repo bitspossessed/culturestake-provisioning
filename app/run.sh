@@ -10,7 +10,6 @@ done
 
 export DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db:5432/$POSTGRES_DATABASE_MAIN
 export DATABASE_DIALECT=postgres
-
 export NODE_ENV=production
 
 npm run db:migrate
