@@ -29,7 +29,7 @@ services:
       context: .
       dockerfile: app/Dockerfile
       args:
-        - GIT_COMMIT=654edbf
+        - GIT_COMMIT=d2f0c64
     container_name: culturestake-app
     depends_on:
       - db
