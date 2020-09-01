@@ -29,6 +29,7 @@ services:
       - conf:/etc/nginx/conf.d
       - html:/usr/share/nginx/html
       - vhost.d:/etc/nginx/vhost.d
+      - ./nginx-proxy/default:/etc/nginx/vhost.d/default
 
   gen:
     image: jwilder/docker-gen:0.7.0
