@@ -16,6 +16,9 @@ down: ## Stop containers
 logs: ## Follow container logs
 	$(COMPOSE) logs -f
 
+list: ## List containers
+	$(COMPOSE) ps
+
 contracts: ## Download and migrate contracts
 	./scripts/migrate-contracts.sh
 
