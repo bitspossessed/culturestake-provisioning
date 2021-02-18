@@ -23,6 +23,12 @@ services:
       "--noVMErrorsOnRPCResponse"
     ]
 
+  redis:
+    image: redis:6.0.1-alpine
+    container_name: culturestake-redis
+    ports:
+      - "6379:6379"
+
   ipfs:
     image: ipfs/go-ipfs:v0.4.23
     container_name: culturestake-ipfs-node
