@@ -4,7 +4,6 @@ set -e
 
 DATABASES=(
   $POSTGRES_DATABASE_GRAPH_NODE
-  $POSTGRES_DATABASE_MAIN
 )
 
 if [[ $ENV == "development" ]]
