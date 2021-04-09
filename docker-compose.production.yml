@@ -32,7 +32,7 @@ services:
       context: .
       dockerfile: app/Dockerfile
       args:
-        - GIT_COMMIT=f2f9ed3
+        - GIT_COMMIT=7d9575a
     container_name: culturestake-app
     depends_on:
       - db
@@ -45,3 +45,18 @@ services:
       - LETSENCRYPT_EMAIL=${SSL_EMAIL}
     volumes:
       - uploads:/usr/src/app/uploads
+
+  worker:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+      args:
+        - GIT_COMMIT=7d9575a
+    container_name: culturestake-worker
+    depends_on: 
+      - db
+      - redis
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL="redis://redis:6379"
