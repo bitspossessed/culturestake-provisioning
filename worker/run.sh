@@ -1,7 +1,5 @@
 #!/bin/sh
 
-echo "Worker file"
-
 # Wait for postgres to be ready
 while ! PGPASSWORD=$POSTGRES_PASSWORD pg_isready -h "db" -U "$POSTGRES_USER" -d "$POSTGRES_DATABASE_MAIN" > /dev/null 2> /dev/null; do
   echo "Waiting for database to be ready ..."
