@@ -2,7 +2,7 @@
 
 source "scripts/common.sh"
 
-REPOSITORY=https://github.com/lazaruslabs/culturestake-subgraph.git
+REPOSITORY=https://github.com/bitspossessed/culturestake-subgraph.git
 FOLDER_NAME=subgraph
 
 check_tmp_folder $REPOSITORY $FOLDER_NAME
@@ -14,7 +14,7 @@ rm -rf build src/types
 # git checkout 123457
 
 git fetch --all
-git reset --hard origin/master
+git reset --hard origin/main
 
 # Install dependencies
 echo "Installing npm dependencies .."
