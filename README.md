@@ -1,6 +1,6 @@
 # culturestake-provisioning
 
-Infrastructure provisioning for [CultureStake](https://github.com/lazaruslabs/culturestake) development and production environments.
+Infrastructure provisioning for [CultureStake](https://github.com/bitspossessed/culturestake) development and production environments.
 
 ## Setup
 
@@ -13,6 +13,8 @@ Infrastructure provisioning for [CultureStake](https://github.com/lazaruslabs/cu
     ```
 
 ## Usage
+
+**Note:** Depending on how docker was installed, some of these commands may require `sudo`, but `make contracts` and `make subgraph` do not use docker and should not require root. Running them as root will make the contracts and subgraph files owned by root, which can cause unexpected behaviour.
 
 ```
 # Build all docker containers
