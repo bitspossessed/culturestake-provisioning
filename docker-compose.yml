@@ -19,6 +19,7 @@ services:
 
   redis:
     image: redis:6.0.1-alpine
+    container_name: culturestake-redis
 
   nginx:
     image: nginx:1.19.1-alpine
