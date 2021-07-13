@@ -38,6 +38,9 @@ make subgraph
 # Stop all containers
 make down
 
+# Stop all containers and delete all volumes
+make delete
+
 # Remove temporary files
 make clean
 ```
