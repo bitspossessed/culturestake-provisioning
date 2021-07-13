@@ -13,7 +13,7 @@ up: ## Start containers in background
 down: ## Stop containers
 	$(COMPOSE) down
 
-down-clean: ## Stop containers, delete volumes
+delete: ## Stop containers, delete volumes
 	$(COMPOSE) down -v
 
 logs: ## Follow container logs
