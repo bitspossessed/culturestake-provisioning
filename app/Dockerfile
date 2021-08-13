@@ -21,7 +21,7 @@ WORKDIR /usr/src/app
 # Prepare variables
 COPY .env .
 
-RUN npm install \
+RUN npm ci \
       && npm run build
 
 # Remove unneeded dependencies
