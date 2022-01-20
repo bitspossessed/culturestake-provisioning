@@ -32,7 +32,7 @@ services:
       context: .
       dockerfile: app/Dockerfile
       args:
-        - GIT_COMMIT=2ece8e4
+        - GIT_COMMIT=54f3f76
     container_name: culturestake-app
     depends_on:
       - db
@@ -51,7 +51,7 @@ services:
       context: .
       dockerfile: worker/Dockerfile
       args:
-        - GIT_COMMIT=2ece8e4
+        - GIT_COMMIT=54f3f76
     container_name: culturestake-worker
     depends_on: 
       - db
